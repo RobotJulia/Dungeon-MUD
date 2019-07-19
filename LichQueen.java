@@ -18,13 +18,12 @@ public class LichQueen extends Monster{
 		maxHeal = 70;
 		spellDamage = 90;
 		xps = 700;
-		monies = 110 + (int)(Math.random() * 40);
-		inventory.add("Sword of the Leech");
+		monies = 110 + (int)(Math.random() * 100);
 	}
 
 	@Override
 	public String toString() {
-		return "Lich King";
+		return "Lich Queen";
 	}
 	@Override
 	protected ArrayList<String> getSpellBook() {
@@ -53,8 +52,8 @@ public class LichQueen extends Monster{
 			}
 			if(Math.random() > .6) {
 				int damRoll = monster.minDamage + (int)(Math.random() * (monster.maxDamage - monster.minDamage)); 
-				System.out.println("The Lich King attacks causing " + damRoll + " damage.");
-				System.out.println("The Lich King absorbs " + damRoll + " hitpoints.");
+				System.out.println("The Lich Queen attacks causing " + damRoll + " damage.");
+				System.out.println("The Lich Queen absorbs " + damRoll + " hitpoints.");
 				monster.hps = monster.hps + damRoll;
 				if(monster.hps > monster.fullHP) {
 					monster.hps = monster.fullHP;
@@ -66,10 +65,10 @@ public class LichQueen extends Monster{
 			}
 			else {	
 				damRoll = monster.minDamage + (int)(Math.random() * (monster.maxDamage - monster.minDamage)); 
-				System.out.println("The Lich King attacks causing " + damRoll + " damage.");
+				System.out.println("The Lich Queen attacks causing " + damRoll + " damage.");
 				player.hps = player.hps - damRoll;
 				if(Math.random() > .6) {
-					System.out.println("You have been poisioned!");
+					System.out.println("You have been poisoned!");
 					player.isPoisioned();
 				}
 				if(player.hps <= 0) {
@@ -83,5 +82,12 @@ public class LichQueen extends Monster{
 	}	
 	}
 
+	@Override
+	public ArrayList<String> getInventory() {
+		ArrayList<String> list = new ArrayList<String>();
+		list.add("small healing potion");
+		list.add("Sword of the Leech");
+		return list;
+	}
 	
 }
