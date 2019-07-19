@@ -76,7 +76,16 @@ public class GiantBat extends Monster {
 			System.out.println(monster.name + " attacked but missed!");
 		}
 	}
+		
 	}
+	
+	@Override
+	public ArrayList<String> getInventory() {
+		ArrayList<String> list = new ArrayList<String>();
+		list.add("small healing potion");
+		return list;
+	}
+	
 }	
 	
 

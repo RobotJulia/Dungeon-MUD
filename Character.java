@@ -57,10 +57,10 @@ public abstract class Character {
 		}
 	}
 
-	protected boolean isPoisioned() {
+	protected boolean isPoisoned() {
 		this.hps = this.hps - 4;
-		System.out.println("You lose 4 life from the poision.");
-		return isPoisioned();	
+		System.out.println("You lose 4 life from the poison.");
+		return isPoisoned();	
 	}
 
 	protected boolean isFrog(Character player) {

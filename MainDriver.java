@@ -43,6 +43,7 @@ public class MainDriver {
 		} catch (IOException e) {
 			System.out.println("Load failed.");
 		}
+		
 		if(player == null) {
 			player = new Sorceress("New Player");
 			player.name = getPlayerName(kb);
@@ -257,8 +258,8 @@ public class MainDriver {
 	private static Hero loadHero(String fileName, Boolean[] rooms) throws IOException {
 			
 			try {	
-				
-				Scanner f = FileUtil.openInputFile(fileName);
+				File file = new File(fileName);
+				Scanner f = new Scanner (file);
 
 				while(f.hasNext()) {	
 					String name = f.nextLine();
@@ -447,7 +448,9 @@ public class MainDriver {
 	}
 	private static Boolean[] getRooms(String fileName) {
 		try {
-			Scanner f = FileUtil.openInputFile(fileName);
+			File file = new File(fileName);
+			Scanner f = new Scanner(file);
+			
 			while(f.hasNext()) {
 				for(int i = 0; i < 25; i++) {
 					f.nextLine();
@@ -456,11 +459,14 @@ public class MainDriver {
 				for(int j = 0; j < 11; j++) {
 					rooms[j] = Boolean.parseBoolean(f.nextLine());
 				}
+				f.close(); // recent addition
 				return rooms;
 			}	
+			f.close();
 		} catch (IOException e) {
 			System.out.println("Room restoration failure.");
 		}
+		
 		return null;	
 	}
 	
@@ -597,49 +603,48 @@ public class MainDriver {
 					System.out.println("4. maiden's kiss			25 monies");
 					System.out.println("5. leave");
 					choice = kb.nextLine();
-					switch(choice) {
-					case "1": choice = "1"; {
+					
+					if(choice.equals("1")) {
 						if(player.monies - 40 < 0) {
 							System.out.println("You cannot afford it.");
-							break;
 						}
 						else {
 							player.monies = player.monies - 40;
 							player.inventory.add("small potion");
 							System.out.println("Item puchased.");
-							break;
 						}
 					}
-					case "2": choice = "2"; {
+					if(choice.equals("2")) {
 						if(player.monies - 25 < 0) {
 							System.out.println("You cannot afford it.");
 						}
-						player.monies = player.monies - 25;
-						player.inventory.add("antidote");
-						System.out.println("Item purchased.");
-						break;
+						else {
+							player.monies = player.monies - 25;
+							player.inventory.add("antidote");
+							System.out.println("Item purchased.");
+						}
 					}
-					case "3": choice = "3"; {
+					if(choice.equals("3")) {
 						if(player.monies - 25 < 0) {
 							System.out.println("You cannot afford it.");
 						}
-						player.monies = player.monies - 25;
-						player.inventory.add("eyedrops");
-						System.out.println("Item purchased.");
-						break;
+						else {
+							player.monies = player.monies - 25;
+							player.inventory.add("eyedrops");
+							System.out.println("Item purchased.");
+						}
 					}
-					case "4": choice = "4"; {
+					if(choice.equals("4")) {
 						if(player.monies - 25 < 0) {
 							System.out.println("You cannot afford it.");
 						}
-						player.monies = player.monies - 25;
-						player.inventory.add("maiden's kiss");
-						System.out.println("Item purchased.");
-						break;
+						else {
+							player.monies = player.monies - 25;
+							player.inventory.add("maiden's kiss");
+							System.out.println("Item purchased.");
+						}	
 					}
-					
-				} break;
-				} 
+				}
 			} 
 			
 			else if(option.equals("2")) {
@@ -653,8 +658,7 @@ public class MainDriver {
 					System.out.println("4. elbow pads			60 monies");
 					System.out.println("5. leave");
 					choice = kb.nextLine();
-					switch(choice) {
-					case "1": choice = "1"; {
+					if(choice.equals("1")) {
 						if(player.monies - 100 < 0) {
 							System.out.println("You cannot afford it.");
 						}
@@ -662,10 +666,9 @@ public class MainDriver {
 							player.monies = player.monies - 100;
 							player.inventory.add("small sword");
 							System.out.println("Item puchased.");
-						break;
 						}
 					}
-					case "2": choice = "2"; {
+					if(choice.equals("2")) {
 						if(player.monies - 80 < 0) {
 							System.out.println("You cannot afford it.");
 						}
@@ -673,10 +676,9 @@ public class MainDriver {
 							player.monies = player.monies - 80;
 							player.inventory.add("small labrys");
 							System.out.println("Item purchased.");
-							break;
 						}
 					}
-					case "3": choice = "3"; {
+					if(choice.equals("3")) {
 						if(player.monies - 60 < 0) {
 							System.out.println("You cannot afford it.");
 						}
@@ -684,10 +686,9 @@ public class MainDriver {
 							player.monies = player.monies - 60;
 							player.inventory.add("headgear");
 							System.out.println("Item purchased.");
-							break;
 						}
 					}
-					case "4": choice = "4"; {
+					if(choice.equals("4")) {
 						if(player.monies - 60 < 0) {
 							System.out.println("You cannot afford it.");
 						}
@@ -695,13 +696,12 @@ public class MainDriver {
 							player.monies = player.monies - 60;
 							player.inventory.add("elbowpads");
 							System.out.println("Item purchased.");
-							break;
-					}
+						}
 					
-					} break;
+					}
 				}
 			} 
-		}
+		
 			
 			else if(option.equals("3")) {
 				choice = "";
@@ -714,8 +714,7 @@ public class MainDriver {
 					System.out.println("4. feather			60 monies");
 					System.out.println("5. leave");
 					choice = kb.nextLine();
-					switch(choice) {
-					case "1": choice = "1"; {
+					if(choice.equals("1")) {
 						if(player.monies - 100 < 0) {
 							System.out.println("You cannot afford it.");
 						}
@@ -723,10 +722,9 @@ public class MainDriver {
 							player.monies = player.monies - 100;
 							player.inventory.add("small charm");
 							System.out.println("Item puchased.");
-							break;
 						}	
 					}
-					case "2": choice = "2"; {
+					if(choice.equals("2")) {
 						if(player.monies - 80 < 0) {
 							System.out.println("You cannot afford it.");
 						}
@@ -734,10 +732,9 @@ public class MainDriver {
 							player.monies = player.monies - 80;
 							player.inventory.add("metal rod");
 							System.out.println("Item purchased.");
-							break;
 						}
 					}
-					case "3": choice = "3"; {
+					if(choice.equals("3")) {
 						if(player.monies - 60 < 0) {
 							System.out.println("You cannot afford it.");
 						}
@@ -745,10 +742,9 @@ public class MainDriver {
 							player.monies = player.monies - 60;
 							player.inventory.add("woodstaff");
 							System.out.println("Item purchased.");
-							break;
 						}
 					}
-					case "4": choice = "4"; {
+					if(choice.equals("4")) {
 						if(player.monies - 60 < 0) {
 							System.out.println("You cannot afford it.");
 						}
@@ -756,10 +752,8 @@ public class MainDriver {
 							player.monies = player.monies - 60;
 							player.inventory.add("feather");
 							System.out.println("Item purchased.");
-							break;
 						}
 					}
-				} break;
 				}	
 			}
 			else if(option.equals("4")) {
@@ -767,7 +761,6 @@ public class MainDriver {
 				String yesno = "";
 				System.out.println("Would you like to stay at the inn? You have $" + player.monies + " monies.");
 				System.out.println("It's only 10 monies (y/n) ?");
-				System.out.println();
 				yesno = kb.nextLine();
 				if(yesno.equals("y") || yesno.equals("Y") || yesno.equals("yes") || yesno.equals("Yes")) {
 					if(player.monies - 10 < 0) {
@@ -830,7 +823,7 @@ public class MainDriver {
 		for(int i =0; i < enemies.size(); i++) {
 			Monster enemy = (Monster) enemies.get(i);
 			if(enemy.isPoisioned) {
-				enemy.isPoisioned();
+				enemy.isPoisoned();
 			}
 			
 			if(enemy.chanceToHit > Math.random()) {
@@ -846,7 +839,7 @@ public class MainDriver {
 	private static void enemyTurn(Hero player, Monster enemy) {
 		int turns = 1;
 		if(enemy.isPoisioned) {
-			enemy.isPoisioned();
+			enemy.isPoisoned();
 		}
 		if(enemy.attSpeed > 2 * player.attSpeed) {
 			turns = (enemy.attSpeed / player.attSpeed);
@@ -867,7 +860,7 @@ public class MainDriver {
 		for(int i =0; i < enemies.size(); i++) {
 			Monster enemy = (Monster) enemies.get(i);
 			if(enemy.isPoisioned) {
-				enemy.isPoisioned();
+				enemy.isPoisoned();
 			}
 			if(enemy.chanceToHit > Math.random()) {
 				enemy.attack(kb, enemies, player);
@@ -1018,8 +1011,7 @@ public class MainDriver {
 					}
 					if(draw == 0) {
 						enemies.add(new GiantBat("Giant Bat " + (i+1)));
-						Monster mon = (Monster) enemies.get(i);
-						mon.setInventory(mon);
+						// 
 					}	
 				}
 				playRoom2(kb, player, enemies);

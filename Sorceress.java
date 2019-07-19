@@ -41,20 +41,25 @@ public class Sorceress extends Hero {
 			System.out.println("Choose a target:");
 			choice = kb.nextLine();
 			int index = Integer.parseInt(choice)-1;
+			
 			Monster enemy = (Monster) enemies.get(index);
 			System.out.println("You cast " + spellBook.get(0) + " at " + enemy.name + " dealing " + damageRoll + " damage.");
 			enemy.hps = enemy.hps - damageRoll;
+			
 			if(enemy.hps <= 0) {
 				player.xps = enemy.xps + player.xps;
 				player.monies = enemy.monies + player.monies;
-				player.inventory.addAll(enemy.inventory);
+				
+				ArrayList<String>inventory = enemy.getInventory();
+				
 				System.out.println(enemy.name + " is dead." );
+				
 				if(!enemy.inventory.isEmpty()) {
 					System.out.println(enemy.name + " dropped " + enemy.inventory.toString());
 					System.out.println("You retrieve " + enemy.inventory.toString());
 				}
+				
 				enemies.remove(index);
-				System.out.println(enemy.name + " is dead." );
 				System.out.println("There are " + enemies.size() + " enemies left.");
 			}
 			else {
@@ -95,7 +100,7 @@ public class Sorceress extends Hero {
 			System.out.println("You cast" + spellBook.get(2) + " on " + enemy.name);
 			if(.4 > Math.random()) {
 				System.out.println("You poision " + enemy.name);
-				enemy.isPoisioned();
+				enemy.isPoisoned();
 			}
 			else {
 				System.out.println("You try to poision " + enemy.name + " but fail.");
@@ -187,7 +192,7 @@ public class Sorceress extends Hero {
 				player.mps = player.mps - 4;
 				if(.4 > Math.random()) {
 					System.out.println("You poision " + mon.name);
-					mon.isPoisioned();
+					mon.isPoisoned();
 				}
 				else {
 					System.out.println("You try to poision " + mon.name + " but fail.");
