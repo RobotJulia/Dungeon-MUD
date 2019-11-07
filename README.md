@@ -7,4 +7,4 @@ This dungeon crawler was designed to show a few software principles including a 
 
 save often.
 
-~Enjoy~
+~Enjoy
